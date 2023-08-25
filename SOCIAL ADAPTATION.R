@@ -178,6 +178,8 @@ infected_at_t10 <- SIR_data2$I[[10]]
 recovered_at_t10 <- SIR_data2$R[[10]]
 ####################################################################
 # Define a function named SIR_StaticAdaptation with input parameters N, b, tmax, f, and th
+#f  = social adaptation factor
+#th = prevalence threshold for adaptation
 SIR_StaticAdaptation = function(N, b, tmax, f, th) {
   # Set values for parameters beta and gamma
   beta = 0.5
@@ -193,7 +195,7 @@ SIR_StaticAdaptation = function(N, b, tmax, f, th) {
   # Create a static network graph (g1) without social adaptation
   g1 = spatgraph(dfa, "geometric", par = b)
   
-  # Calculate a modified value for parameter b (b2) based on f
+  # Calculate a modified value for parameter b (b2) based on SA factor f
   b2 = b / f
   
   # Create a static network graph (g2) with social adaptation
@@ -288,6 +290,9 @@ recovered_at_t10 <- SIR_data3$R[[10]]
 #########################################################################
 # SIR_FullymixedAdaptation with input parameters N, b, tmax, f, and th
 #adaptation in fully mixed network
+#f  = social adaptation factor
+#th = prevalence threshold for adaptation
+
 SIR_FullyMixedAdaptation = function(N, b, tmax, f, th) {
   # Set values for parameters beta and gamma
   beta = 0.5
@@ -369,7 +374,8 @@ SIR_FullyMixedAdaptation = function(N, b, tmax, f, th) {
     R = cbind(R, nextR)
     # Check if prevalence exceeds the threshold
     if ((sum(nextI) / N) > th) {
-      # Update Agent Locations with social adaptation
+      # Update Agent Locations 
+      # and form graph with social adaptation
       xa <- runif(N, 0, 1)  # Random mobility of all agents
       ya <- runif(N, 0, 1)
       dfa <- data.frame(xa, ya)
@@ -377,11 +383,12 @@ SIR_FullyMixedAdaptation = function(N, b, tmax, f, th) {
       p1 <- g1[]
       gr <- graph_from_adj_list(p1$edges)
     } else {
-      # Update Agent Locations with social adaptation
+      # Update Agent Locations 
+      # and form graph without social adaptation
       xa <- runif(N, 0, 1)  
       ya <- runif(N, 0, 1)
       dfa <- data.frame(xa, ya)
-      g1 <- spatgraph(dfa, "geometric", par = b)#without social adaptation
+      g1 <- spatgraph(dfa, "geometric", par = b)
       p1 <- g1[]
       gr <- graph_from_adj_list(p1$edges)  # Use the graph without social adaptation
     }
@@ -443,6 +450,10 @@ SIRnumercial = function(N, tmax, b) {
 result <- SIRnumercial(N = 500, tmax = 100, b = 0.05)
 ##########################################################################
 # Define a function named SIRDelay with input parameters N, t, r, l, f, th, and d
+#f  = social adaptation factor
+#th = prevalence threshold for adaptation
+#d = delay
+#l = length of patch
 SIRDelay = function(N, t, b, l, f, th, d,beta) {
   tmax = t
   S = c()  # List to store Susceptible values
@@ -509,9 +520,7 @@ getPeakInfectionWithDelay = function(N, t, b, l, f, th,beta) {
 # Example usage:
 peak_infection_results <- getPeakInfectionWithDelay(N = 500, t = 100, b = 0.03, l = 1,
                                                     f = 4, th = 0.1, beta=0.5)
-
 ##############################################################################
-
 # Define a function named SIR1 with input parameters N, tmax, r, and f
 SIR_double_threshold = function(N, tmax, b, f) {
   l = 1
@@ -558,3 +567,4 @@ SIR_double_threshold = function(N, tmax, b, f) {
 
 # Example usage:
 SIR_DT = SIR_double_threshold(N = 500, tmax = 150, b = 0.05, f = 6)
+#####################################################################
