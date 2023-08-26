@@ -3,7 +3,7 @@ library(spatstat)
 library(spatgraphs)
 ###############################################################################
 #N = NUMBER OF AGNETS
-#b = CHARACTERISTIC TRANMISSION RADIUS
+#b = CHARACTERISTIC TRANSMISSION RADIUS
 #tmax = Epidemic Run Time
 # SIR_Maxmobility: Simulate Infectious Disease Spread with Mobility
 
