@@ -375,10 +375,10 @@ SIR_FullyMixedAdaptation = function(N, b, tmax, f, th) {
     if ((sum(nextI) / N) > th) {
       # Update Agent Locations 
       # and form graph with social adaptation
-      xa <- runif(N, 0, 1*f)  # patch length increased f times
-      ya <- runif(N, 0, 1*f)
+      xa <- runif(N, 0, 1)
+      ya <- runif(N, 0, 1)
       dfa <- data.frame(xa, ya)
-      g1 <- spatgraph(dfa, "geometric", par = b)
+      g1 <- spatgraph(dfa, "geometric", par = b/f)
       p1 <- g1[]
       gr <- graph_from_adj_list(p1$edges)
     } else {
