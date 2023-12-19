@@ -456,7 +456,8 @@ SIRnumercial_SA = function(N, tmax, b, f, th) {
   S[1] <- N - 1  # Initial susceptible number
   I[1] <- 1      # Initial Infected number
   R[1] <- 0      # Initial Recovered number
-  
+  #considering the equation of susceptibles 
+  #changing density from rho into  rho/(f)**2 is numerically same as #reducing b into b/f 
   rho1 = N / (l ** 2)          # Density without social distancing
   rho2 = N / ((l * f) ** 2)    # Density with social distancing
   inf = c()                     # List to store daily infections
@@ -510,7 +511,8 @@ SIRnumerical_Delay = function(N, t, b, f, th, d, beta) {
   S[1] <- N - 1 # Initial susceptible number
   I[1] <- 1     # Initial Infected number
   R[1] <- 0     # Initial Recovered number
-  
+  #considering the equation of susceptibles 
+  #changing density from rho into  rho/(f)**2 is numerically same as #reducing b into b/f 
   rho1 = N / (l ** 2)           # Density without social adaptation
   rho2 = N / ((l * f) ** 2)     # Density with social adaptation
   sus = c()                       # List to store susceptible values
@@ -586,7 +588,8 @@ SIRnumerical_double_threshold = function(N, tmax, b, f) {
   S[1] <- N - 1  # Initial susceptible number
   I[1] <- 1      # Initial Infected number
   R[1] <- 0      # Initial Recovered number
-  
+  #considering the equation of susceptibles 
+  #changing density from rho into  rho/(f)**2 is numerically same as.   #reducing b into b/f 
   rho1 = N / (l ** 2)          # Density without social distancing
   rho2 = N / ((l * f) ** 2)    # Density with social distancing
   inf = c()                     # List to store daily infections
