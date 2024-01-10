@@ -1,6 +1,6 @@
 par(mfrow = c(4, 2), mar = c(4, 5, 4, 2))
 r=read.csv("countries-aggregated.csv")
-
+#upper threshold 0.2, lower threshold=0.005 unless mentioned specifically
 Ge=data.frame(r$Confirmed[54673:55233],r$Recovered[54673:55233])
 Is=data.frame(r$Confirmed[69361:69921],r$Recovered[69361:69921])
 It=data.frame(r$Confirmed[70177:70737],r$Recovered[70177:70737])
